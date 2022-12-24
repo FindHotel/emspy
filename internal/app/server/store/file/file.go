@@ -19,7 +19,7 @@ func New(file string) (store.Store, error) {
 	return &FileStore{file: f}, nil
 }
 
-func (s *FileStore) Insert(record interface{}) error {
+func (s *FileStore) InsertWebhook(record interface{}) error {
 	input := record.([]byte)
 
 	_, err := s.file.Write(input)

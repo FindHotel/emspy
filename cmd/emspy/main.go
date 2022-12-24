@@ -13,14 +13,14 @@ import (
 )
 
 func main() {
-	store, err := file.New("webhooks.log.json")
+	webhooksStore, err := file.New("webhooks.log.json")
 	if err != nil {
 		log.Fatalf("Can't start server because store unavailable: %s", err)
 	}
-	server := server.New(":8080", store)
+	server := server.New(":8080", webhooksStore)
 
 	go func() {
-		if err := server.ListenAndServe(); err != nil {
+		if err := server.Run(); err != nil {
 			panic(err)
 		}
 	}()

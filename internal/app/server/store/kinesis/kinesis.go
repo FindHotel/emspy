@@ -40,7 +40,7 @@ func New(awsSession *session.Session, streamName string) (store.Store, error) {
 	return &KinesisStore{streamName: stream, kinesis: kc}, nil
 }
 
-func (s *KinesisStore) Insert(record interface{}) error {
+func (s *KinesisStore) InsertWebhook(record interface{}) error {
 	input := record.([]byte)
 
 	putOutput, err := s.kinesis.PutRecord(&kinesis.PutRecordInput{

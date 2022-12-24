@@ -1,5 +1,5 @@
 package store
 
 type Store interface {
-	Insert(interface{}) error
+	InsertWebhook(interface{}) error
 }

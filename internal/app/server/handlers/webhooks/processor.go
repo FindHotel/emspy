@@ -13,5 +13,5 @@ func NewProcessor(store store.Store) *Processor {
 }
 
 func (p *Processor) Capture(input []byte) error {
-	return p.store.Insert(input)
+	return p.store.InsertWebhook(input)
 }
