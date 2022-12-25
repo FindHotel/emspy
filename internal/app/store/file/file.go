@@ -4,7 +4,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/FindHotel/emspy/internal/app/server/store"
+	"github.com/FindHotel/emspy/internal/app/store"
 )
 
 type FileStore struct {
@@ -19,7 +19,7 @@ func New(file string) (store.Store, error) {
 	return &FileStore{file: f}, nil
 }
 
-func (s *FileStore) InsertWebhook(record interface{}) error {
+func (s *FileStore) InsertWebhook(source string, record interface{}) error {
 	input := record.([]byte)
 
 	_, err := s.file.Write(input)

@@ -1,4 +1,4 @@
-package shortcut
+package github
 
 import (
 	"log"

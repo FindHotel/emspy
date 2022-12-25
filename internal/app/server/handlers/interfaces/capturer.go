@@ -1,5 +1,7 @@
 package interfaces
 
+import "context"
+
 type Capturer interface {
-	Capture([]byte) error
+	Capture(context.Context, []byte) error
 }

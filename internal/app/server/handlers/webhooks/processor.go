@@ -1,17 +1,28 @@
 package webhooks
 
 import (
-	"github.com/FindHotel/emspy/internal/app/server/store"
+	"context"
+
+	"github.com/FindHotel/emspy/internal/app/store"
+	"golang.org/x/sync/errgroup"
 )
 
 type Processor struct {
-	store store.Store
+	stores []store.Store
+	source string
 }
 
-func NewProcessor(store store.Store) *Processor {
-	return &Processor{store: store}
+func NewProcessor(source string, stores []store.Store) *Processor {
+	return &Processor{source: source, stores: stores}
 }
 
-func (p *Processor) Capture(input []byte) error {
-	return p.store.InsertWebhook(input)
+func (p *Processor) Capture(ctx context.Context, input []byte) error {
+	g, _ := errgroup.WithContext(ctx)
+	for _, store := range p.stores {
+		s := store
+		g.Go(func() error {
+			return s.InsertWebhook(p.source, input)
+		})
+	}
+	return g.Wait()
 }
