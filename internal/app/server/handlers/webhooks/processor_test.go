@@ -37,7 +37,7 @@ func TestNewProcessor(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewProcessor(tt.args.source, tt.args.stores); !reflect.DeepEqual(got, tt.want) {
+			if got := NewProcessor(tt.args.stores, tt.args.source); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewProcessor() = %v, want %v", got, tt.want)
 			}
 		})

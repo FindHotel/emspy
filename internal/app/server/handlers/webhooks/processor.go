@@ -12,7 +12,7 @@ type Processor struct {
 	source string
 }
 
-func NewProcessor(source string, stores []store.Store) *Processor {
+func NewProcessor(stores []store.Store, source string) *Processor {
 	return &Processor{source: source, stores: stores}
 }
 

@@ -30,7 +30,7 @@ func (s *Server) Shutdown(ctx context.Context) error {
 	return s.srv.Shutdown(ctx)
 }
 
-func New(addr string, logger logger.Logger, webhooksStores []store.Store) *Server {
+func New(addr string, webhooksStores []store.Store, logger logger.Logger) *Server {
 	router := gin.Default()
 	handlers.RegisterDefaultHandlers(router)
 

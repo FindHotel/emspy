@@ -7,12 +7,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterWebhooks(rg *gin.RouterGroup, store store.Store) {
+func RegisterWebhooks(rg *gin.RouterGroup, stores []store.Store) {
 	webhooks := rg.Group("webhooks")
 
 	shortcutRG := webhooks.Group("shortcut")
-	shortcutRG.POST("/v1", shortcut.WebhooksHandler(NewProcessor("shortcut", store)))
+	shortcutRG.POST("/v1", shortcut.WebhooksHandler(NewProcessor(stores, "shortcut")))
 
 	githubRG := webhooks.Group("github")
-	githubRG.POST("/v1", github.WebhooksHandler(NewProcessor("github", store)))
+	githubRG.POST("/v1", github.WebhooksHandler(NewProcessor(stores, "github")))
 }
